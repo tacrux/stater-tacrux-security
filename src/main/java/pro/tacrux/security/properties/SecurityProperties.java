@@ -3,7 +3,7 @@ package pro.tacrux.security.properties;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import pro.tacrux.security.constants.CommonConstant;
+import pro.tacrux.security.constants.Constants;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = SecurityProperties.PREFIX)
 public class SecurityProperties {
 
-    public static final String PREFIX = CommonConstant.PROJECT_NAME_PREFIX + "." + "security";
+    public static final String PREFIX = Constants.CommonConstant.PROJECT_NAME_PREFIX + "." + "security";
 
     /**
      * 认证授权服务端配置,客户端配置无效
@@ -75,13 +75,13 @@ public class SecurityProperties {
      * <b>Description:</b>
      *  服务端同时也是访问受体，作为客户端，可同时配置
      *
-     * <b>Author:</b> zhouguangyong@360humi.com
+     * <b>Author:</b> tacrux
      * <b>Date:</b> 2022年4月30日 下午10:26:00
      * <b>Copyright:</b> Copyright 2017-2022 www.360humi.com Technology Co., Ltd. All rights reserved.
      * <b>Changelog:</b>
      *   Ver   		Date                    Author               	 Detail
      *   ----------------------------------------------------------------------
-     *   1.0   2022年4月30日 下午10:26:00    zhouguangyong@360humi.com     new file.
+     *   1.0   2022年4月30日 下午10:26:00    tacrux     new file.
      * </pre>
      */
     @Data

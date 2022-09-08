@@ -3,6 +3,7 @@ package pro.tacrux.security;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import pro.tacrux.security.config.SecurityConfig;
 import pro.tacrux.security.properties.SecurityProperties;
 
 /**
@@ -12,9 +13,8 @@ import pro.tacrux.security.properties.SecurityProperties;
 @EnableConfigurationProperties({
         SecurityProperties.class})
 @ImportAutoConfiguration(
-		// TODO: 2022/9/2
+        SecurityConfig.class
 )
 public class SecurityAutoConfiguration {
-    public static void main(String[] args) {
-    }
+
 }

@@ -77,7 +77,7 @@ public class SecurityProperties {
      *
      * <b>Author:</b> tacrux
      * <b>Date:</b> 2022年4月30日 下午10:26:00
-     * <b>Copyright:</b> Copyright 2017-2022 www.360humi.com Technology Co., Ltd. All rights reserved.
+     * <b>Copyright:</b> Copyright tacrux All rights reserved.
      * <b>Changelog:</b>
      *   Ver   		Date                    Author               	 Detail
      *   ----------------------------------------------------------------------

@@ -1,6 +1,8 @@
 package pro.tacrux.security.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.session.Session;
 import pro.tacrux.security.constants.Constants;
@@ -24,11 +26,15 @@ import java.util.Collection;
  * @author tacrux
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginUser implements UserDetails {
+    private String userid;
     private String username;
     private String password;
     private String phone;
     private String email;
+    private Boolean enabled;
     private Collection<UriGrantedAuthority> authorities;
 
     private String storeId;

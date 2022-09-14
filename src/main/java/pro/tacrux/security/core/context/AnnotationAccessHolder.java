@@ -29,7 +29,7 @@ import java.util.*;
  *
  * <b>Author:</b> tacrux
  * <b>Date:</b> 2022年5月1日 上午10:51:06
- * <b>Copyright:</b> Copyright 2017-2022 www.360humi.com Technology Co., Ltd. All rights reserved.
+ * <b>Copyright:</b> Copyright tacrux All rights reserved.
  * <b>Changelog:</b>
  *   Ver   		Date                    Author               	 Detail
  *   ----------------------------------------------------------------------

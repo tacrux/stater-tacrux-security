@@ -4,8 +4,7 @@
 package pro.tacrux.security.server.dao;
 
 import pro.tacrux.security.model.LoginUser;
-import pro.tacrux.security.server.model.LoginReqVo;
-import pro.tacrux.security.server.provider.AuthenticationProviderSupports;
+import pro.tacrux.security.server.model.CredentialsVo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,16 +24,16 @@ import javax.servlet.http.HttpServletResponse;
  *   1.0   2022年5月5日 下午1:18:15    tacrux     new file.
  * </pre>
  */
-public interface UserDetailsService<T extends LoginReqVo> extends AuthenticationProviderSupports {
+public interface UserDetailsService<C extends CredentialsVo>{
 
 	/**
 	 * 加载用户详情
-	 * @param parameter	认证请求参数
+	 * @param credentialsVo	认证请求参数
 	 * @return
 	 */
-	 LoginUser loadUserDetails(T parameter);
+	 LoginUser loadUserDetails(C credentialsVo);
 
-	boolean verification(LoginUser loginUser,T parameter, HttpServletRequest request, HttpServletResponse response);
+	boolean verification(LoginUser loginUser, C credentialsVo, HttpServletRequest request, HttpServletResponse response);
 
 
 	/**
@@ -43,7 +42,7 @@ public interface UserDetailsService<T extends LoginReqVo> extends Authentication
 	 * @param request
 	 * @param response
 	 */
-	void afterVerification(LoginUser loginUser,T parameter, HttpServletRequest request, HttpServletResponse response);
+	void afterVerification(LoginUser loginUser, C credentialsVo, HttpServletRequest request, HttpServletResponse response);
 	
 
 	/**
@@ -52,5 +51,5 @@ public interface UserDetailsService<T extends LoginReqVo> extends Authentication
 	 * @param request
 	 * @param response
 	 */
-	 void beforeVerification(LoginUser loginUser,T parameter, HttpServletRequest request, HttpServletResponse response);
+	 void beforeVerification(LoginUser loginUser, C credentialsVo, HttpServletRequest request, HttpServletResponse response);
 }

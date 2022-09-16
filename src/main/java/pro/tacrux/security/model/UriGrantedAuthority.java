@@ -48,7 +48,6 @@ public final class UriGrantedAuthority implements GrantedAuthority {
 		this.systemCode = systemCode;
 	}
 
-
 	@Override
 	public String getAuthority() {
 		return JsonUtil.to(this);

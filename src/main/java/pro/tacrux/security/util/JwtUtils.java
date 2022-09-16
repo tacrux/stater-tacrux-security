@@ -22,6 +22,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,15 +52,19 @@ public class JwtUtils {
      * @return
      */
     public static String create(Map<String, Object> header,String subject) {
-        return create(header, new HashMap<>(0), subject,JWT_ISSUER, TOKEN_TIMEOUT);
+        return create(header, new HashMap<>(0), subject,JWT_ISSUER, TOKEN_TIMEOUT,null);
     }
 
     public static String create(Map<String, Object> header, Map<String, String> claims,String subject) {
-        return create(header, claims, subject,JWT_ISSUER, TOKEN_TIMEOUT);
+        return create(header, claims, subject,JWT_ISSUER, TOKEN_TIMEOUT,null);
     }
 
     public static String create(Map<String, Object> header, long timeout,String subject) {
-        return create(header, new HashMap<>(0), subject,JWT_ISSUER, timeout);
+        return create(header, new HashMap<>(0), subject,JWT_ISSUER, TOKEN_TIMEOUT,null);
+    }
+
+    public static String create(long timeout,String subject,String jti) {
+        return create(Collections.emptyMap(),Collections.emptyMap(),subject,JWT_ISSUER,timeout,jti);
     }
 
     /**
@@ -69,7 +74,7 @@ public class JwtUtils {
      * @param issuer
      * @return
      */
-    public static String create(Map<String, Object> header, Map<String, String> claims, String subject,String issuer, long timeout) {
+    public static String create(Map<String, Object> header, Map<String, String> claims, String subject,String issuer, long timeout,String jti) {
         String token;
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_KEY);
@@ -78,7 +83,8 @@ public class JwtUtils {
                     .withHeader(header)
                     .withIssuer(issuer)
                     .withExpiresAt(date)
-                    .withSubject(subject);
+                    .withSubject(subject)
+                .withJWTId(jti);
             for (String key : claims.keySet()) {
                 builder.withClaim(key, claims.get(key));
             }

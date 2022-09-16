@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.util.Assert;
 import org.springframework.web.filter.OncePerRequestFilter;
 import pro.tacrux.security.model.R;
 import pro.tacrux.security.core.context.OnlineUserHolder;
@@ -47,6 +51,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     @Autowired
     private OnlineUserHolder onlineUserHolder;
 
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = null;
@@ -72,13 +77,14 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         DecodedJWT decodedjwt = null;
         try {
             decodedjwt = JwtUtils.decode(token);
-            assert decodedjwt != null;
+            Assert.notNull(decodedjwt,"");
         } catch (Exception e) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().write(objectMapper.writeValueAsString(R.fail()));
             return;
         }
+
 
         //token有效期校验
         if (decodedjwt.getExpiresAt().after(new Date())) {

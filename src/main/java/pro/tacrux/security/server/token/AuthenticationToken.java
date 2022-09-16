@@ -7,13 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.util.Assert;
 import pro.tacrux.security.model.LoginUser;
-import pro.tacrux.security.server.model.LoginReqVo;
+import pro.tacrux.security.server.model.CredentialsVo;
 
-import java.util.Collection;
+import java.util.Collections;
 
 /**
  * <pre>
@@ -31,31 +28,24 @@ import java.util.Collection;
  * </pre>
  */
 @Accessors(chain = true)
-public abstract class AuthenticationToken extends AbstractAuthenticationToken {
+public class AuthenticationToken<C extends CredentialsVo> extends AbstractAuthenticationToken {
 	
 
 
 	@Setter
 	@Getter
-	private Object principal;
+	private String principal;
 	
 	@Setter
 	@Getter
-	private Object credentials;
+	private C credentials;
 
-	/**
-	 * Creates a token with the supplied array of authorities.
-	 *
-	 * @param authorities the collection of <tt>GrantedAuthority</tt>s for the principal
-	 *                    represented by this authentication object.
-	 */
-	public AuthenticationToken(Collection<? extends GrantedAuthority> authorities) {
-		super(authorities);
-	}
+	@Setter
+	@Getter
+	private LoginUser details;
 
-	public AuthenticationToken(Collection<? extends GrantedAuthority> authorities, Object principal,
-		Object credentials) {
-		super(authorities);
+	public AuthenticationToken(String principal, C credentials) {
+		super(Collections.emptyList());
 		this.principal = principal;
 		this.credentials = credentials;
 	}

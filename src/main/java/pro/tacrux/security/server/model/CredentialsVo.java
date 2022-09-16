@@ -1,6 +1,8 @@
 package pro.tacrux.security.server.model;
 
-import pro.tacrux.security.server.token.AuthenticationToken;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * <pre>
@@ -16,6 +18,7 @@ import pro.tacrux.security.server.token.AuthenticationToken;
  *   1.0   2022/9/13 16:12    wangtao@360humi.com     new file.
  * </pre>
  */
-public abstract class LoginReqVo<TOKEN extends AuthenticationToken> {
-    public abstract TOKEN toAuthentication();
+@Data
+public class CredentialsVo implements Serializable {
+    private String principal;
 }

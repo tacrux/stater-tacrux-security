@@ -1,5 +1,11 @@
 package pro.tacrux.security.model;
 
+import pro.tacrux.security.util.JsonUtil;
+
+import javax.servlet.ServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+
 public class R<T> {
 
     /**
@@ -136,6 +142,14 @@ public class R<T> {
      */
     public static <T> R<T> fail(Status status) {
         return R.var(status);
+    }
+
+    public void writeTo(OutputStream outputStream) {
+        try {
+            JsonUtil.getObjectMapper().writeValue(outputStream,this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public enum Status {

@@ -50,7 +50,7 @@ public final class UriGrantedAuthority implements GrantedAuthority {
 
 	@Override
 	public String getAuthority() {
-		return JsonUtil.to(this);
+		return systemCode.concat(" ").concat(method.name()).concat(",").concat(uri);
 	}
 
 
